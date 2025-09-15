@@ -1,0 +1,55 @@
+﻿<Window x:Class="Автогонки.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Автогонки"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        Title="MainWindow" Height="517" Width="525" Background="Gray">
+
+    <Canvas Background="Gray" Name="myCanvas" Focusable="True" KeyDown="OnKeyDown" KeyUp="OnKeyUP" Width="525" Margin="0,36,0,-16">
+
+        <Rectangle Height="106" Width="20" Fill="White" Tag="roadMarks" Canvas.Left="237" Canvas.Top="-152" />
+        <Rectangle Height="106" Width="20" Fill="White" Tag="roadMarks" Canvas.Left="237" Canvas.Top="10" />
+        <Rectangle Height="106" Width="20" Fill="White" Tag="roadMarks" Canvas.Left="237" Canvas.Top="176" />
+        <Rectangle Height="106" Width="20" Fill="White" Tag="roadMarks" Canvas.Left="237" Canvas.Top="348" />
+
+        <Rectangle Tag="Car" Height="80" Width="55" Canvas.Left="93" Canvas.Top="87" >
+            <Rectangle.Fill>
+                <ImageBrush ImageSource="/images/машина2.png"/>
+            </Rectangle.Fill>
+        </Rectangle>
+        <Rectangle Tag="Car" Height="80" Width="55" Canvas.Left="381" Canvas.Top="286">
+            <Rectangle.Fill>
+                <ImageBrush ImageSource="/images/машина1.png"/>
+            </Rectangle.Fill>
+        </Rectangle>
+
+        <Rectangle Name="player" Height="80" Width="54" Canvas.Left="220" Canvas.Top="338" HorizontalAlignment="Center" VerticalAlignment="Top" >
+            <Rectangle.Fill>
+                <ImageBrush ImageSource="/images/игрок.png"/>
+            </Rectangle.Fill>
+        </Rectangle>
+
+        <Label Name="scoreText" Content="Время: 00 секунд" FontSize="18" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Top" Height="39" />
+        <Label Name="coinText" Content="Монет: 0" FontSize="18" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" Canvas.Left="399" Height="39" />
+
+        <StackPanel Name ="Menu" VerticalAlignment="Top" Height="29" Width="525" HorizontalAlignment="Center" Canvas.Top="-41">
+            <Menu x:Name ="MenuBar" Width="525" Height="28" BorderBrush="#FFF0F0F0" Foreground="#FFF0F0F0" OpacityMask="#FFF0F0F0">
+                <Button x:Name ="Start" Content="Старт" Click="Start_Click" VerticalAlignment="Top" Width="60" Height="25" RenderTransformOrigin="0.524,0.503" BorderBrush="{x:Null}"/>
+                <Button x:Name ="Exit" Content="Выход" Click="Close_Click" VerticalContentAlignment="Center" Width="60" Height="25" BorderBrush="{x:Null}"/>
+                <MenuItem x:Name ="Compl" Header="Сложность" Background="#FFDDDDDD" BorderBrush="{x:Null}" Foreground="Black" Width="74" Height="25">
+                    <MenuItem x:Name="easy" Header="низкая" Click="easy_Click"/>
+                    <MenuItem x:Name="normal" Header="средняя" Click="normal_Click"/>
+                    <MenuItem x:Name="hard" Header="высокая" Click="hard_Click"/>
+                    <MenuItem x:Name="x2" Header="x2" Click="x2_Click"/>
+                    <MenuItem x:Name="my" Header="своя" Click="my_Click"/>
+                </MenuItem>
+                <Label x:Name ="Challenge" Content="Сложность:"/>
+                <Label x:Name ="User" Content="Пользователь:" Width="92" RenderTransformOrigin="0.537,0.577"/>
+            </Menu>
+        </StackPanel>
+    </Canvas>
+</Window>
+ 
