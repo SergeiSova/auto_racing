@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Автогонки", "WpfAp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestProject2", "UnitTestProject2\UnitTestProject2.csproj", "{2556C66C-E25E-4680-906F-F5BD2BAC68DA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestProject1", "UnitTestProject1\UnitTestProject1.csproj", "{5FDE79D8-E393-4EA6-BEE0-AC67A5F4B184}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{2556C66C-E25E-4680-906F-F5BD2BAC68DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2556C66C-E25E-4680-906F-F5BD2BAC68DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2556C66C-E25E-4680-906F-F5BD2BAC68DA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5FDE79D8-E393-4EA6-BEE0-AC67A5F4B184}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5FDE79D8-E393-4EA6-BEE0-AC67A5F4B184}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5FDE79D8-E393-4EA6-BEE0-AC67A5F4B184}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5FDE79D8-E393-4EA6-BEE0-AC67A5F4B184}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

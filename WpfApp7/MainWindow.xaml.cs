@@ -50,13 +50,12 @@ namespace Автогонки
 
             Login Login = new Login();
 
-            if (Login.ShowDialog() == true) ;
-                //login = string.Parse(Login.login);
+            User.Content = "Пользователь: " + (Login.ShowDialog() == true ? Login.log : "гость");
         }
 
         private void GameLoop(object sender, EventArgs e)
         {
-            score += .05;
+            score += gameTimer.Interval.TotalSeconds;
 
             coinCounter -= 1;
 
@@ -112,6 +111,7 @@ namespace Автогонки
                         gameTimer.Stop(); 
                         gameOver = true; 
                         MessageBox.Show("Нажмите Enter для повторного запуска игры", "Конец игры");
+                        break;
                     }
                 }
 
@@ -137,14 +137,17 @@ namespace Автогонки
                 }
             } 
 
-            foreach (Rectangle y in itemRemover)
-            {
-                myCanvas.Children.Remove(y);
-            }
+            RemoveItems();
         }
 
         private void OnKeyDown(object sender, KeyEventArgs e)
         {
+            if (e.Key == Key.Escape)
+            {
+                Close();
+                return;
+            }
+
             
             if (e.Key == Key.Left)
             {
@@ -184,7 +187,7 @@ namespace Автогонки
             score = 0;
             
             scoreText.Content = "Время: 0 секунд";
-            coinText.Content = "Очков: 0";
+            coinText.Content = "Монет: 0";
 
             playerImage.ImageSource = new BitmapImage(new Uri("pack://application:,,,/images/игрок.png"));
             coinImage.ImageSource = new BitmapImage(new Uri("pack://application:,,,/images/монета.png"));
@@ -210,7 +213,8 @@ namespace Автогонки
                 }
 
             }
-            itemRemover.Clear();
+            RemoveItems();
+            myCanvas.Focus();
         }
 
         private void Close_Click(object sender, RoutedEventArgs e)
@@ -243,7 +247,7 @@ namespace Автогонки
 
         private void x2_Click(object sender, RoutedEventArgs e)
         {
-            speed = speed * 2;
+            speed = GameRules.DoubleSpeed(speed);
             Challenge.Content = "Сложность: "+ speed;
         }
 
@@ -253,28 +257,19 @@ namespace Автогонки
         {
             myspeed myspeed = new myspeed();
 
-           if (myspeed.ShowDialog() == true)
-
-                // try
-                // {
-                speed = double.Parse(myspeed.mspee);
-                
-            Challenge.Content = "Сложность: своя (" + speed +")";
-          // }
-           
-           /* catch (System.FormatException)
-           {
-                    MessageBox.Show("Некорректный ввод", "Ошибка");
-           }
-
-            if (speed <= 0)
+            if (myspeed.ShowDialog() != true)
             {
-                speed = 15;
-                Challenge.Content = "Сложность: средняя";
-                MessageBox.Show("Некорректный ввод", "Ошибка");
-                
-            } */
+                return;
+            }
 
+            if (!GameRules.TryParseSpeed(myspeed.mspee, out double customSpeed))
+            {
+                MessageBox.Show($"Введите число больше 0 и не больше {GameRules.MaxSpeed}", "Некорректный ввод");
+                return;
+            }
+
+            speed = customSpeed;
+            Challenge.Content = "Сложность: своя (" + speed + ")";
         }
 
         /*private void no_Click(object sender, RoutedEventArgs e)
@@ -308,7 +303,7 @@ namespace Автогонки
         private void ChangeCars(Rectangle car)
         {
 
-            carNum = rand.Next(1, 6); 
+            carNum = rand.Next(1, 7); 
 
             ImageBrush carImage = new ImageBrush(); 
 
@@ -338,6 +333,15 @@ namespace Автогонки
 
             Canvas.SetTop(car, (rand.Next(100, 400) * -1));
             Canvas.SetLeft(car, rand.Next(0, 430));
+        }
+
+        private void RemoveItems()
+        {
+            foreach (Rectangle item in itemRemover)
+            {
+                myCanvas.Children.Remove(item);
+            }
+            itemRemover.Clear();
         }
 
         private void MakeCoin()

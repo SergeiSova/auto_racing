@@ -47,7 +47,7 @@
                     <MenuItem x:Name="my" Header="своя" Click="my_Click"/>
                 </MenuItem>
                 <Label x:Name ="Challenge" Content="Сложность:"/>
-                <Label x:Name ="User" Content="Пользователь:" Width="92" RenderTransformOrigin="0.537,0.577"/>
+                <Label x:Name ="User" Content="Пользователь:" Width="180" RenderTransformOrigin="0.537,0.577"/>
             </Menu>
         </StackPanel>
     </Canvas>

@@ -17,11 +17,11 @@
         <TextBox Name="login" Grid.Row="1" MinWidth="250"></TextBox>
 
         <TextBlock Margin="0,0,0,45" Grid.Row="2">Введите пароль:</TextBlock>
-        <TextBox Name="password" Grid.Row="2" MinWidth="250" Margin="0,21,0,27"></TextBox>
+        <PasswordBox Name="password" Grid.Row="2" MinWidth="250" Margin="0,21,0,27" />
 
         <WrapPanel Grid.Row="2" HorizontalAlignment="Right" Margin="0,44,0,0">
             <Button IsDefault="True" Click="Login_Click" MinWidth="60" Margin="0,0,10,0">Войти</Button>
-            <Button IsDefault="True" Click="Singup_Click" MinWidth="60" Height="25">Регестрация</Button>
+            <Button Click="Singup_Click" MinWidth="60" Height="25">Регистрация</Button>
         </WrapPanel>
 
     </Grid>

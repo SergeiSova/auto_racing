@@ -65,11 +65,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="GameRules.cs" />
     <Compile Include="Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
     </Compile>
     <Compile Include="sysdiagrams.cs">
-      <DependentUpon>БД.tt</DependentUpon>
     </Compile>
     <Compile Include="Window1.xaml.cs">
       <DependentUpon>Window1.xaml</DependentUpon>
@@ -77,17 +77,10 @@
     <Compile Include="БД.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>БД.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="БД.Context1.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>БД.Context.tt</DependentUpon>
     </Compile>
     <Compile Include="БД.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>БД.tt</DependentUpon>
     </Compile>
     <Compile Include="БД.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -98,10 +91,8 @@
       <DependentUpon>БД.xaml</DependentUpon>
     </Compile>
     <Compile Include="Игра.cs">
-      <DependentUpon>БД.tt</DependentUpon>
     </Compile>
     <Compile Include="Игроки.cs">
-      <DependentUpon>БД.tt</DependentUpon>
     </Compile>
     <Page Include="Login.xaml">
       <SubType>Designer</SubType>
@@ -171,18 +162,6 @@
     <Resource Include="images\машина5.png" />
     <Resource Include="images\машина6.png" />
     <Resource Include="images\монета.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="БД.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>БД.edmx</DependentUpon>
-      <LastGenOutput>БД.Context1.cs</LastGenOutput>
-    </Content>
-    <Content Include="БД.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>БД.edmx</DependentUpon>
-      <LastGenOutput>БД.cs</LastGenOutput>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

@@ -1,5 +1,4 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 using Автогонки;
 
 namespace UnitTestProject1
@@ -8,15 +7,36 @@ namespace UnitTestProject1
     public class UnitTest1
     {
         [TestMethod]
-        public void TestMethod()
+        public void DoubleSpeed_DoublesValue()
         {
-            double speed = 10;
-            double x2speed = 2;
-            // myspeed m = new myspeed();
-            double excpected = 20;
-            MainWindow W = new MainWindow();
-            double actual = W.test_m(speed, x2speed);
-            Assert.AreEqual(excpected, actual, "не корректные данные");
+            Assert.AreEqual(20, GameRules.DoubleSpeed(10));
+        }
+
+        [TestMethod]
+        public void DoubleSpeed_DoesNotExceedMaximum()
+        {
+            Assert.AreEqual(GameRules.MaxSpeed, GameRules.DoubleSpeed(GameRules.MaxSpeed));
+        }
+
+        [DataTestMethod]
+        [DataRow("10", 10.0)]
+        [DataRow("10,5", 10.5)]
+        [DataRow("10.5", 10.5)]
+        public void TryParseSpeed_AcceptsPositiveNumbers(string text, double expected)
+        {
+            Assert.IsTrue(GameRules.TryParseSpeed(text, out double speed));
+            Assert.AreEqual(expected, speed);
+        }
+
+        [DataTestMethod]
+        [DataRow("-10")]
+        [DataRow("0")]
+        [DataRow("Скорость")]
+        [DataRow(".,!?")]
+        [DataRow("1000")]
+        public void TryParseSpeed_RejectsInvalidValues(string text)
+        {
+            Assert.IsFalse(GameRules.TryParseSpeed(text, out _));
         }
     }
 }
