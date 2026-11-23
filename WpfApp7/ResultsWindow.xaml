@@ -1,0 +1,20 @@
+<Window x:Class="Автогонки.ResultsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Результаты игроков" Height="517" Width="525" ResizeMode="NoResize" WindowStartupLocation="CenterOwner">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <DataGrid Name="ResultsGrid" AutoGenerateColumns="False" IsReadOnly="True" CanUserAddRows="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Игрок" Binding="{Binding Login}" Width="*" />
+                <DataGridTextColumn Header="Дата" Binding="{Binding PlayedAt}" Width="130" />
+                <DataGridTextColumn Header="Время, сек" Binding="{Binding Seconds}" Width="85" />
+                <DataGridTextColumn Header="Монеты" Binding="{Binding Coins}" Width="70" />
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button Grid.Row="1" Content="Назад" IsCancel="True" IsDefault="True" Width="80" Margin="0,10,0,0" HorizontalAlignment="Right" />
+    </Grid>
+</Window>

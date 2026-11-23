@@ -1,16 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+﻿using System.Windows;
 using Автогонки;
 
 namespace WpfApp7
@@ -20,22 +8,26 @@ namespace WpfApp7
     /// </summary>
     public partial class Login : Window
     {
-        public Login()
+        private readonly PlayerStore store;
+
+        public Login(PlayerStore store)
         {
+            this.store = store;
             InitializeComponent();
+            login.Focus();
         }
 
         private void Login_Click(object sender, RoutedEventArgs e)
         {
-            Submit();
+            Submit(false);
         }
 
         private void Singup_Click(object sender, RoutedEventArgs e)
         {
-            Submit();
+            Submit(true);
         }
 
-        private void Submit()
+        private void Submit(bool register)
         {
             bool emptyLogin = string.IsNullOrWhiteSpace(login.Text);
             bool emptyPassword = string.IsNullOrEmpty(password.Password);
@@ -43,31 +35,46 @@ namespace WpfApp7
             if (emptyLogin && emptyPassword)
             {
                 MessageBox.Show("Поля «Логин» и «Пароль» не должны быть пустыми");
+                return;
             }
-            else if (emptyLogin)
+            if (emptyLogin)
             {
                 MessageBox.Show("Поле «Логин» не должно быть пустым");
+                return;
             }
-            else if (emptyPassword)
+            if (emptyPassword)
             {
                 MessageBox.Show("Поле «Пароль» не должно быть пустым");
+                return;
             }
-            else
+
+            try
             {
+                if (register)
+                {
+                    if (!store.Register(login.Text, password.Password, out string error))
+                    {
+                        MessageBox.Show(error);
+                        return;
+                    }
+                    MessageBox.Show("Вы зарегистрировались");
+                }
+                else if (!store.Authenticate(login.Text, password.Password))
+                {
+                    MessageBox.Show("Неверный логин или пароль");
+                    return;
+                }
                 DialogResult = true;
+            }
+            catch (PlayerStoreException)
+            {
+                MessageBox.Show("Ошибка обращения к базе данных!");
             }
         }
 
         public string log
         {
-
             get { return login.Text.Trim(); }
-        }
-
-        public string pass
-        {
-
-            get { return password.Password; }
         }
     }
 }

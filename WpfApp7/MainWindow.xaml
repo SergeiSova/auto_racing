@@ -39,6 +39,7 @@
             <Menu x:Name ="MenuBar" Width="525" Height="28" BorderBrush="#FFF0F0F0" Foreground="#FFF0F0F0" OpacityMask="#FFF0F0F0">
                 <Button x:Name ="Start" Content="Старт" Click="Start_Click" VerticalAlignment="Top" Width="60" Height="25" RenderTransformOrigin="0.524,0.503" BorderBrush="{x:Null}"/>
                 <Button x:Name ="Exit" Content="Выход" Click="Close_Click" VerticalContentAlignment="Center" Width="60" Height="25" BorderBrush="{x:Null}"/>
+                <Button x:Name ="Data" Content="Данные" Click="Data_Click" VerticalContentAlignment="Center" Width="60" Height="25" BorderBrush="{x:Null}"/>
                 <MenuItem x:Name ="Compl" Header="Сложность" Background="#FFDDDDDD" BorderBrush="{x:Null}" Foreground="Black" Width="74" Height="25">
                     <MenuItem x:Name="easy" Header="низкая" Click="easy_Click"/>
                     <MenuItem x:Name="normal" Header="средняя" Click="normal_Click"/>
@@ -47,7 +48,7 @@
                     <MenuItem x:Name="my" Header="своя" Click="my_Click"/>
                 </MenuItem>
                 <Label x:Name ="Challenge" Content="Сложность:"/>
-                <Label x:Name ="User" Content="Пользователь:" Width="180" RenderTransformOrigin="0.537,0.577"/>
+                <Label x:Name ="User" Content="Игрок:" Width="125" RenderTransformOrigin="0.537,0.577"/>
             </Menu>
         </StackPanel>
     </Canvas>

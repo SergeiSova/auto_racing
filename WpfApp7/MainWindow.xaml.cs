@@ -34,6 +34,9 @@ namespace Автогонки
  
         double score;
 
+        readonly PlayerStore playerStore = new PlayerStore();
+        string currentPlayer;
+
         bool moveLeft, moveRight, gameOver;
         public MainWindow()
         {
@@ -48,9 +51,10 @@ namespace Автогонки
             Challenge.Content = "Сложность: средняя";
             gameOver = true;
 
-            Login Login = new Login();
+            Login Login = new Login(playerStore);
 
-            User.Content = "Пользователь: " + (Login.ShowDialog() == true ? Login.log : "гость");
+            currentPlayer = Login.ShowDialog() == true ? Login.log : null;
+            User.Content = "Игрок: " + (currentPlayer ?? "гость");
         }
 
         private void GameLoop(object sender, EventArgs e)
@@ -110,6 +114,7 @@ namespace Автогонки
 
                         gameTimer.Stop(); 
                         gameOver = true; 
+                        SaveCurrentResult();
                         MessageBox.Show("Нажмите Enter для повторного запуска игры", "Конец игры");
                         break;
                     }
@@ -333,6 +338,46 @@ namespace Автогонки
 
             Canvas.SetTop(car, (rand.Next(100, 400) * -1));
             Canvas.SetLeft(car, rand.Next(0, 430));
+        }
+
+        private void SaveCurrentResult()
+        {
+            if (currentPlayer == null)
+            {
+                return;
+            }
+
+            try
+            {
+                playerStore.SaveResult(currentPlayer, score, coin);
+            }
+            catch (PlayerStoreException)
+            {
+                MessageBox.Show("Ошибка обращения к базе данных! Результат не сохранён", "Ошибка");
+            }
+        }
+
+        private void Data_Click(object sender, RoutedEventArgs e)
+        {
+            bool wasRunning = gameTimer.IsEnabled;
+            gameTimer.Stop();
+            moveLeft = false;
+            moveRight = false;
+
+            try
+            {
+                new ResultsWindow(playerStore.GetResults()) { Owner = this }.ShowDialog();
+            }
+            catch (PlayerStoreException)
+            {
+                MessageBox.Show("Ошибка обращения к базе данных!", "Ошибка");
+            }
+
+            if (wasRunning)
+            {
+                gameTimer.Start();
+            }
+            myCanvas.Focus();
         }
 
         private void RemoveItems()
